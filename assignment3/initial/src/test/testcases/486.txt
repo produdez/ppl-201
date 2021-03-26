@@ -1,0 +1,1 @@
+Program([FuncDecl(Id('main'), [VarDecl(Id('a'), [], None), VarDecl(Id('b'), [], None)], ([], [While(BinaryOp('>', CallExpr(Id('main'), [Id('b'), Id('x')]), Id('a')), ([], []))]))])

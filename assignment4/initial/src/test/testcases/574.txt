@@ -1,0 +1,1 @@
+Function: main Body: Var: a[3] = {1,2,3}; a[1] = f(a); f1(a[0]); f1(a[1]); f1(a[2]); EndBody. Function: f Parameter: x[3] Body:  Return x[2] + 1; EndBody. Function: f1 Parameter: temp Body: print(string_of_int(temp)); Return; EndBody.

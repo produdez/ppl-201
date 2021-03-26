@@ -1,0 +1,1 @@
+Function: main Body: If 7e3 *. "5" Then a=""; Else b(); EndIf. EndBody.

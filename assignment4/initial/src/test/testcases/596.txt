@@ -1,0 +1,1 @@
+Function: main Body: Var: t= True, f=False, x=15,y=3,z=12.5,k=4.3; t=(x>y) && !(k=/=z) || !!!f ||!t; print(string_of_bool(t)); EndBody.

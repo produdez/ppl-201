@@ -1,0 +1,18 @@
+Var: a=1234,"sslsls",0x54,True,3.25e1;
+Var: b[2][3][4] = {{1,2,3},{4,5,6}};
+Var: c,d = 6,e,f;
+Var: m,n[123];
+Var: c,d,a[1][2] = 1,2,a[7],{1,2,3};
+Var: a,b,c;
+Var: a[3]={{},{}};
+Var: c[3];
+**Wrong ones**
+Var: x = ;
+x=3;
+Var: a[3]3 = 5;
+Var: b = {}{};
+
+"  STRing \n \t shit '"Inner'" 231 \'"
+" Unter STRing
+" shtsad \"
+"fasdfasjdffsdf \a saldjflsdf "

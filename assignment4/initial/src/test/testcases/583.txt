@@ -1,0 +1,1 @@
+Function: main Body: Var: a[1] = {1}, b[1] ={2} ; f1(a,b); print(string_of_int(a[0])); print(string_of_int(b[0])); EndBody. Function: f1 Parameter: x[1],y[1] Body: Var: temp[1] = {0}; temp = x; x=y; y=temp; Return; EndBody.

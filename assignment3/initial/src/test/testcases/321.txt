@@ -1,0 +1,1 @@
+Function: main Body: If a[3][6][7] Then Break; ElseIf "True" Then Return; Else Return null; If notThat3 Then asign=asi; Else Continue; EndIf. EndIf. EndBody.

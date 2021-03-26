@@ -1,0 +1,1 @@
+Var: a[3] = {"1","2","3"}, b[3] = {"","",""}; Function: main Body: Var: i =0; For (i=int_of_string(a[0])-1, i<int_of_string(a[2]), int_of_string(a[1])-1) Do b[i] = "changed"; EndFor. print(a[0]); print(a[1]); print(a[2]); print(b[0]); print(b[1]); print(b[2]); EndBody.

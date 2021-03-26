@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(main)[],([][If(BinaryOp(||,Id(a),Id(b)),[],[Return()])Else([],[Break()]),If(BinaryOp(>,Id(a),BinaryOp(+,Id(b),Id(c))),[],[Break()])ElseIf(Id(nothing),[],[Return()])Else([],[Continue()])]))])

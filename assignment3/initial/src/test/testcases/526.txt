@@ -1,0 +1,1 @@
+Program([VarDecl(Id('a'), [], None), VarDecl(Id('b'), [2, 2], None), FuncDecl(Id('main'), [VarDecl(Id('a'), [1, 1], None)], ([], [Assign(Id('a'), IntLiteral(5))]))])

@@ -1,0 +1,1 @@
+Function: main Body: Var: a=88, b = 76; print(string_of_int(gcd(a,b))); EndBody. Function: gcd Parameter: a,b Body: If a==0 Then Return b; EndIf. If b==0 Then Return a; EndIf. If a==b Then Return a ; EndIf. If a>b Then Return gcd(a-b,b); EndIf. Return gcd(a,b-a); EndBody.

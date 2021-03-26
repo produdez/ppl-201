@@ -1,0 +1,1 @@
+Function: main Body: Var: a [3][3] = {{1,2,3},{4,5,6},{7,8,9}}, b=100; If a[0][0] < a[0][1] Then print(string_of_int(a[0][0] + b));  EndIf. EndBody. 

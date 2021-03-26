@@ -1,0 +1,1 @@
+Function: main Body: Var: x=12.5, y=3.4; print(string_of_float(f(x,y))); EndBody. Function: f Parameter: a,b Body: Return a\.b; EndBody.

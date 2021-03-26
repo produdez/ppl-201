@@ -1,0 +1,1 @@
+Function: main Body: Var: x = 10; While x>0 Do If x<3 Then Break; ElseIf x%2==0 Then x=x-1; Continue; EndIf. print(string_of_int(x)); x=x-1; EndWhile. EndBody.

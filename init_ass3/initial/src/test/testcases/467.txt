@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(main)[VarDecl(Id(a)),VarDecl(Id(b))],([][Dowhile([],[Assign(Id(a),IntLiteral(5))],Id(a))]))])

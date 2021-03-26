@@ -1,0 +1,1 @@
+Var: a[1] = {1}; Function: main Body: a={78}; print(string_of_int(a[0])); EndBody.

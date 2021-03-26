@@ -1,0 +1,1 @@
+TypeMismatchInExpression(BinaryOp('+', StringLiteral('Str'), StringLiteral('ing')))

@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(main)[],([][If(IntLiteral(2815),[],[Assign(Id(a),Id(x))])ElseIf(IntLiteral(4660),[],[Assign(Id(x),IntLiteral(5)),If(Id(another),[],[CallStmt(Id(doit),[])])ElseIf(Id(nother),[],[Break()])Else([],[])])Else([],[Break()])]))])

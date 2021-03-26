@@ -1,0 +1,1 @@
+Var: a[2][1] = {{1},{2}}; Function: main Body: print(string_of_int(a[0][0])); EndBody.

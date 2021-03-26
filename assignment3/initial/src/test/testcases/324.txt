@@ -1,0 +1,1 @@
+Function: empty Body: For(i = 2, 1>2, True ) Do If a==!b Then Return "Pro'"Inner\n'""; EndIf. EndFor. EndBody.

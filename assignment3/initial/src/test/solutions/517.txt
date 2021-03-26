@@ -1,0 +1,1 @@
+TypeCannotBeInferred(Return(CallExpr(Id('main'), [Id('a')])))

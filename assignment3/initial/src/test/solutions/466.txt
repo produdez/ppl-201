@@ -1,0 +1,1 @@
+TypeMismatchInStatement(Assign(Id('a'), BinaryOp('-.', Id('b'), FloatLiteral(5.5))))

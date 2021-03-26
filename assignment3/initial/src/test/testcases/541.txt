@@ -1,0 +1,1 @@
+Program([FuncDecl(Id('main'), [], ([], [If([[BooleanLiteral(True), [VarDecl(Id('x'), [], IntLiteral(5))], []]], ([], [])), Return(BinaryOp('+.', Id('x'), FloatLiteral(5.5)))]))])

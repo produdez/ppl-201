@@ -1,0 +1,1 @@
+Function: f Body: Return {{1,2},{3,4}}; EndBody. Function: main Body: print(string_of_int(f()[1][0])); EndBody. 

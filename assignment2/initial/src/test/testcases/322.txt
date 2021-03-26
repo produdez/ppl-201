@@ -1,0 +1,1 @@
+Function: main Body: If 1 Then Return 2; If 3 Then Return 4; Else Return "5";  If gg Then Break; ElseIf notgg6 Then Continue; EndIf. EndIf. ElseIf False Then Return True; Else Return 3e7; EndIf. EndBody.

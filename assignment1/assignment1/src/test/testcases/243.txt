@@ -1,0 +1,2 @@
+Function: main Body: If (a==(5+6)) 
+ printf(); Else Return; EndIf. EndBody.

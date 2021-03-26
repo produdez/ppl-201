@@ -1,0 +1,1 @@
+Program([FuncDecl(Id('main'), [VarDecl(Id('x'), [], None)], ([], [If([[BooleanLiteral(True), [VarDecl(Id('x'), [], None)], [If([[BooleanLiteral(False), [VarDecl(Id('y'), [], None)], [Assign(Id('x'), BinaryOp('+', Id('y'), Id('x')))]]], ([], [])), Assign(Id('x'), FloatLiteral(1.2))]]], ([], [])), Assign(Id('x'), IntLiteral(5))]))])

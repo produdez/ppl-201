@@ -1,0 +1,1 @@
+Function: main Body: Var: a=1.2, b=1.8, c= 5.0; c = c *.b \.a -.a -.-.a +.c; print(string_of_float( c)); EndBody.

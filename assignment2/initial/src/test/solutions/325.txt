@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(empty)[],([][For(Id(i),IntLiteral(2),BinaryOp(<=,Id(i),IntLiteral(50)),BinaryOp(+,Id(i),IntLiteral(1)),[],[For(Id(j),Id(i),BinaryOp(<,Id(j),IntLiteral(100)),BinaryOp(+,Id(j),IntLiteral(5)),[],[CallStmt(Id(printf),[Id(j)])]),Continue()])]))])

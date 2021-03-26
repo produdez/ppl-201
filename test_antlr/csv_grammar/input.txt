@@ -1,0 +1,4 @@
+Detail,Month,Shit
+Mid Bo,June,"$2,000"
+,Jan,"""ZIppo"""
+Total Bonus,"","$5,000"

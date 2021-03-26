@@ -1,0 +1,1 @@
+TypeCannotBeInferred(While(BinaryOp('>', CallExpr(Id('main'), [Id('b'), Id('x')]), Id('a')), ([], [])))

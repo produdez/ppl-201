@@ -1,0 +1,9 @@
+"Boolean test"
+true
+False
+True
+false
+T
+F
+1
+0

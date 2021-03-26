@@ -1,0 +1,9 @@
+using namespace std;
+3+5; **this is a comment   
+
+yea boi**
+printf("this is a (motherfucking) string\tshit");
+printf("string inside: '"inside'""+"another string");
+printf("wrong string
+
+");

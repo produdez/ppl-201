@@ -1,0 +1,1 @@
+Function: main Body: Var: i=10; f1(i); EndBody. Function: f1 Parameter: x Body: Var: i = 0; For (i=0 , i<=x, 1) Do Var: j = 0; For (j=x-i, j>=0, -1) Do If j==(x-i)\2 Then Continue; EndIf. If j%2 ==0 Then print(string_of_int(j));  Else print(string_of_int(-j)); EndIf. EndFor. If i == x\2 Then Break; EndIf. EndFor. Return; EndBody.

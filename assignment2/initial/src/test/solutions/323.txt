@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(empty)[],([][For(Id(var),BinaryOp(>,UnaryOp(!,IntLiteral(12)),BooleanLiteral(true)),Id(no),Id(no),[],[])]))])

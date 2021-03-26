@@ -1,0 +1,463 @@
+----- BKIT.g4 -------
+grammar BKIT;
+
+@lexer::header {
+from lexererr import *
+}
+
+@lexer::members {
+def emit(self):
+    tk = self.type
+    result = super().emit()
+    if tk == self.UNCLOSE_STRING:       
+        raise UncloseString(result.text)
+    elif tk == self.ILLEGAL_ESCAPE:
+        raise IllegalEscape(result.text)
+    elif tk == self.ERROR_CHAR:
+        raise ErrorToken(result.text)
+    elif tk == self.UNTERMINATED_COMMENT:
+        raise UnterminatedComment()
+    else:
+        return result;
+}
+
+options{
+	language=Python3;
+}
+
+//MYPART: TEST PARSER and LEXER
+
+//Parser
+program: variable_declaration_part function_declaration_part EOF;
+
+
+//variable declaration
+variable_declaration_part: variable_declaration*;
+variable_declaration: VAR COLON declaration_list SEMI;
+
+declaration_list: (variable | initialization)(COMMA (variable | initialization))*; //either a var or an initialization
+
+initialization: variable ASSIGN literal; 
+variable: ID | array_element;
+
+array_element: ID index_operator;
+index_operator: (LEFT_SQUARE expression RIGHT_SQUARE)+;
+
+literal:
+    bool_lit
+    |INT_LIT
+    |FLOAT_LIT
+    |STRING_LIT
+    |array_lit;
+
+//function declaration
+function_declaration_part: function_declaration*;
+function_declaration:
+    function_name
+    function_parameter?
+    function_body 
+;
+function_name: FUNCTION COLON ID;
+function_parameter: PARAMETER COLON parameter_list;
+parameter_list: variable (COMMA variable)*;
+function_body:
+    BODY COLON
+        statement_list
+    ENDBODY DOT
+    ;
+
+//statements
+statement_list: variable_declaration* //starts with var and then others
+    (assignment_statement
+    |if_statement
+    |for_statement
+    |while_statement
+    |do_while_statement
+    |break_statement
+    |continue_statement
+    |call_statement
+    |return_statement)*
+    ;
+    
+assignment_statement: variable ASSIGN expression SEMI;
+if_statement: 
+    IF expression THEN statement_list
+    (ELSEIF expression THEN statement_list)*
+    (ELSE statement_list)?
+    ENDIF DOT
+    ;
+for_statement:
+    FOR LEFT_PAREN (ID ASSIGN expression) (COMMA expression) (COMMA expression) RIGHT_PAREN DO
+        statement_list
+    ENDFOR DOT
+    ;
+while_statement:
+    WHILE expression DO statement_list ENDWHILE DOT;
+do_while_statement:
+    DO statement_list WHILE expression ENDDO DOT;
+break_statement: BREAK SEMI;
+continue_statement: CONTINUE SEMI;
+call_statement:  function_call SEMI;   
+return_statement: RETURN expression? SEMI;
+//expressions:
+expression_list: expression (COMMA expression)*;
+
+expression: 
+    expression2 relational_op expression2 
+    | expression2;
+expression2: 
+    LEFT_PAREN expression RIGHT_PAREN
+    | function_call
+    | index_operator
+    | <assoc=right> sign_op expression2
+    | <assoc=right> negation_op expression2
+    | expression2 multiplying_op expression2
+    | expression2 adding_op expression2
+    | expression2 logical_op expression2
+    | variable
+    | literal;
+function_call: ID LEFT_PAREN expression_list? RIGHT_PAREN;
+
+
+//.. The BNF style
+// expression: rela_expr;
+// rela_expr: logic_expr relational_op logic_expr | logic_expr;
+// logic_expr: logic_expr logical_op add_expr | add_expr;
+// add_expr: add_expr adding_op mul_expr | mul_expr;
+// mul_expr: mul_expr multiplying_op negation_expr | negation_expr;
+// negation_expr: negation_op negation_expr | sign_expr;
+// sign_expr: sign_op sign_expr | index_expr;
+// index_expr: index_operator | function_call;
+// function_call: ID LEFT_PAREN expression_list? RIGHT_PAREN | sub_expr;
+// sub_expr: LEFT_PAREN expression RIGHT_PAREN | operative;
+// operative: literal | variable ;
+
+
+sign_op: MINUS | MINUS_DOT;
+negation_op: NOT;
+multiplying_op:  (STAR|STAR_DOT|DIV|DIV_DOT|MOD) ;
+adding_op:  (PLUS|PLUS_DOT|MINUS|MINUS_DOT) ;
+logical_op:  (AND| OR) ;
+relational_op: (EQUAL | NOT_EQUAL | LESS | LESS_DOT | GREATER | GREATER_DOT | LESS_EQUAL | LESS_EQUAL_DOT | GREATER_EQUAL | GREATER_EQUAL_DOT | EQUAL_DIV_EQUAL);
+
+
+
+//Lexer
+
+//fragments
+fragment LOWERCASE  : [a-z] ;
+fragment UPPERCASE  : [A-Z] ;
+fragment DIGIT: [0-9];
+
+
+//words
+ID: LOWERCASE (LOWERCASE | UPPERCASE | '_' | DIGIT)*;
+//keywords
+BODY: 'Body';
+BREAK: 'Break';
+CONTINUE:'Continue';
+DO: 'Do';
+ELSE: 'Else';
+ELSEIF: 'ElseIf';
+ENDBODY: 'EndBody';
+ENDIF: 'EndIf';
+ENDFOR: 'EndFor';
+ENDWHILE: 'EndWhile';
+FOR: 'For';
+FUNCTION: 'Function';
+IF: 'If';
+PARAMETER: 'Parameter';
+RETURN: 'Return';
+THEN: 'Then';
+VAR: 'Var';
+WHILE: 'While';
+ENDDO: 'EndDo';
+TRUE: 'True'; 
+FALSE: 'False';
+
+//operators
+    //assignment
+ASSIGN: '=';
+    //arithmetic
+PLUS: '+';
+PLUS_DOT:'+.';
+MINUS: '-';
+MINUS_DOT:'-.';
+STAR:'*';
+STAR_DOT:'*.';
+DIV:'\\';
+DIV_DOT:'\\.';
+MOD:'%';
+    //bool
+NOT:'!';
+AND:'&&';
+OR:'||';
+    //relational
+EQUAL:'==';
+NOT_EQUAL:'!=';
+LESS:'<';
+GREATER:'>';
+LESS_EQUAL:'<=';
+GREATER_EQUAL:'>=';
+EQUAL_DIV_EQUAL:'=/=';
+LESS_DOT:'<.';
+GREATER_DOT:'>.';
+LESS_EQUAL_DOT:'<=.';
+GREATER_EQUAL_DOT:'>=.';
+    //bracets
+LEFT_PAREN: '(';
+RIGHT_PAREN: ')';
+LEFT_SQUARE: '[';
+RIGHT_SQUARE: ']';
+LEFT_CURLY: '{';
+RIGHT_CURLY: '}';
+    //punctuation
+SEMI:';';
+COLON:':';
+DOT: '.';
+COMMA: ',';
+
+//skip
+WS : [ \t\r\f\n]+ -> skip ;
+
+//comment
+BLOCK_COMMENT : '**' .*?'**' -> skip; 
+UNTERMINATED_COMMENT: '**'.*? ; //COMMENT ERROR
+
+//literals 
+fragment BASE_10: '0' | [1-9] DIGIT*;
+fragment BASE_16: '0' ('x'|'X') [1-9A-F][0-9A-F]*;
+fragment BASE_8: '0' ('o'|'O') [1-7][0-7]*;
+INT_LIT: BASE_10 | BASE_16 | BASE_8; // three different bases for integer
+
+fragment EXPONENT_P : [eE] [+-]? DIGIT+;
+fragment DECIMAL_P : '.' DIGIT*;
+FLOAT_LIT : DIGIT+ (DECIMAL_P | EXPONENT_P | DECIMAL_P EXPONENT_P); //float must at least have decimal or exponent
+
+bool_lit: TRUE | FALSE; //this is parser
+
+fragment ESCAPE_SEQUENCE: 
+    '\\\''
+	| '\\\\'
+	| '\\b'
+	| '\\f'
+	| '\\n'
+	| '\\r'
+	| '\\t';
+fragment CHAR_STRING : ~["\\\r\n'] | ESCAPE_SEQUENCE | '\'"'; // '" is used to write "
+STRING_LIT: '"' CHAR_STRING* '"' {self.text = self.text.strip('"')};
+ILLEGAL_ESCAPE: '"' CHAR_STRING* ('\\' ~([bfnrt\\] | '\'') ) {self.text = self.text.replace('"','',1)};
+UNCLOSE_STRING: '"' CHAR_STRING* {self.text = self.text.replace('"','',1)}; 
+
+//array
+
+array_lit:  '{'(literal_list)'}'; //array must have same type but it's not for lex/parser
+literal_list: literal(',' literal)*;
+
+
+//ERRORs
+ERROR_CHAR: .;
+
+----------Result----------
+testcase 1: PASSED
+testcase 2: PASSED
+testcase 3: PASSED
+testcase 4: PASSED
+testcase 5: PASSED
+testcase 6: PASSED
+testcase 7: PASSED
+testcase 8: PASSED
+testcase 9: PASSED
+testcase 10: PASSED
+testcase 11: PASSED
+testcase 12: PASSED
+testcase 13: PASSED
+testcase 14: PASSED
+testcase 15: PASSED
+testcase 16: PASSED
+testcase 17: PASSED
+testcase 18: PASSED
+testcase 19: PASSED
+testcase 20: PASSED
+testcase 21: PASSED
+testcase 22: PASSED
+testcase 23: PASSED
+testcase 24: PASSED
+testcase 25: PASSED
+testcase 26: PASSED
+testcase 27: PASSED
+testcase 28: PASSED
+testcase 29: PASSED
+testcase 30: PASSED
+testcase 31: PASSED
+testcase 32: PASSED
+testcase 33: PASSED
+testcase 34: PASSED
+testcase 35: PASSED
+testcase 36: PASSED
+testcase 37: PASSED
+testcase 38: PASSED
+testcase 39: PASSED
+testcase 40: PASSED
+testcase 41: PASSED
+testcase 42: FAILED
+testcase 43: PASSED
+testcase 44: PASSED
+testcase 45: PASSED
+testcase 46: PASSED
+testcase 47: PASSED
+testcase 48: PASSED
+testcase 49: PASSED
+testcase 50: PASSED
+testcase 51: FAILED
+testcase 52: FAILED
+testcase 53: FAILED
+testcase 54: FAILED
+testcase 55: FAILED
+testcase 56: FAILED
+testcase 57: PASSED
+testcase 58: PASSED
+testcase 59: FAILED
+testcase 60: PASSED
+testcase 61: PASSED
+testcase 62: PASSED
+testcase 63: PASSED
+testcase 64: PASSED
+testcase 65: PASSED
+testcase 66: PASSED
+testcase 67: PASSED
+testcase 68: PASSED
+testcase 69: PASSED
+testcase 70: PASSED
+testcase 71: PASSED
+testcase 72: PASSED
+testcase 73: PASSED
+testcase 74: PASSED
+testcase 75: PASSED
+testcase 76: PASSED
+testcase 77: PASSED
+testcase 78: PASSED
+testcase 79: PASSED
+testcase 80: PASSED
+testcase 81: PASSED
+testcase 82: PASSED
+testcase 83: PASSED
+testcase 84: PASSED
+testcase 85: PASSED
+testcase 86: PASSED
+testcase 87: PASSED
+testcase 88: PASSED
+testcase 89: PASSED
+testcase 90: PASSED
+testcase 91: PASSED
+testcase 92: PASSED
+testcase 93: PASSED
+testcase 94: PASSED
+testcase 95: PASSED
+testcase 96: PASSED
+testcase 97: PASSED
+testcase 98: PASSED
+testcase 99: PASSED
+testcase 100: PASSED
+testcase 101: PASSED
+testcase 102: PASSED
+testcase 103: PASSED
+testcase 104: PASSED
+testcase 105: PASSED
+testcase 106: PASSED
+testcase 107: PASSED
+testcase 108: PASSED
+testcase 109: PASSED
+testcase 110: PASSED
+testcase 111: PASSED
+testcase 112: PASSED
+testcase 113: PASSED
+testcase 114: PASSED
+testcase 115: PASSED
+testcase 116: PASSED
+testcase 117: FAILED
+testcase 118: FAILED
+testcase 119: PASSED
+testcase 120: PASSED
+testcase 121: PASSED
+testcase 122: PASSED
+testcase 123: PASSED
+testcase 124: PASSED
+testcase 125: PASSED
+testcase 126: PASSED
+testcase 127: PASSED
+testcase 128: PASSED
+testcase 129: PASSED
+testcase 130: PASSED
+testcase 131: PASSED
+testcase 132: PASSED
+testcase 133: PASSED
+testcase 134: PASSED
+testcase 135: PASSED
+testcase 136: PASSED
+testcase 137: PASSED
+testcase 138: PASSED
+testcase 139: PASSED
+testcase 140: PASSED
+testcase 141: PASSED
+testcase 142: PASSED
+testcase 143: PASSED
+testcase 144: PASSED
+testcase 145: PASSED
+testcase 146: PASSED
+testcase 147: PASSED
+testcase 148: PASSED
+testcase 149: PASSED
+testcase 150: PASSED
+testcase 151: PASSED
+testcase 152: PASSED
+testcase 153: PASSED
+testcase 154: PASSED
+testcase 155: PASSED
+testcase 156: PASSED
+testcase 157: PASSED
+testcase 158: PASSED
+testcase 159: PASSED
+testcase 160: PASSED
+testcase 161: PASSED
+testcase 162: PASSED
+testcase 163: PASSED
+testcase 164: PASSED
+testcase 165: PASSED
+testcase 166: PASSED
+testcase 167: PASSED
+testcase 168: PASSED
+testcase 169: PASSED
+testcase 170: PASSED
+testcase 171: PASSED
+testcase 172: PASSED
+testcase 173: PASSED
+testcase 174: PASSED
+testcase 175: PASSED
+testcase 176: PASSED
+testcase 177: PASSED
+testcase 178: PASSED
+testcase 179: PASSED
+testcase 180: PASSED
+testcase 181: PASSED
+testcase 182: PASSED
+testcase 183: PASSED
+testcase 184: PASSED
+testcase 185: PASSED
+testcase 186: PASSED
+testcase 187: FAILED
+testcase 188: PASSED
+testcase 189: PASSED
+testcase 190: FAILED
+testcase 191: PASSED
+testcase 192: PASSED
+testcase 193: PASSED
+testcase 194: PASSED
+testcase 195: PASSED
+testcase 196: PASSED
+testcase 197: PASSED
+testcase 198: PASSED
+testcase 199: PASSED
+testcase 200: PASSED
+
+Total: 188 /200

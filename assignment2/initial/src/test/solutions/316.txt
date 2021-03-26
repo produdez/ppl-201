@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(main)[],([][If(BinaryOp(*.,FloatLiteral(7000.0),StringLiteral(5)),[],[Assign(Id(a),StringLiteral())])Else([],[CallStmt(Id(b),[])])]))])

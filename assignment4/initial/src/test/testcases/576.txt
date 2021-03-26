@@ -1,0 +1,1 @@
+Function: main Body: Var: a=5,b=3,c=2; print(string_of_int(a*10 + b*100 + c*1000)); EndBody.

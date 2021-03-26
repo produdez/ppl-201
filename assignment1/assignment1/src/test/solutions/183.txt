@@ -1,0 +1,1 @@
+foo,(,2,+,x,,,4.,y,),+,bar,(,A string 	,),==,float_of_int,(,0O7777,),;,<EOF>

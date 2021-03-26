@@ -1,0 +1,21 @@
+" this is integer test"
+0
+5
+546
+0
+0X2134
+0x1
+0o7684
+0O1
+0xFF123
+0X2134
+"these should give error"
+0x00
+0x
+0O
+7982a24
+0xo
+0oab
+-1
+0o0
+0O0311

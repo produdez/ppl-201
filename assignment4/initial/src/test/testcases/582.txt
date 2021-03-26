@@ -1,0 +1,1 @@
+Function: main Body: Var: a = "a", b = "b"; f1(a,b); print(a); print(b); EndBody. Function: f1 Parameter: x,y Body: Var: temp = ""; temp = x; x=y; y=temp; Return; EndBody.

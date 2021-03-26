@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(main)[],([][If(Id(nothing),[],[Assign(ArrayCell(Id(x),[IntLiteral(3)]),IntLiteral(1))])ElseIf(FloatLiteral(12.3),[],[Assign(ArrayCell(Id(a),[IntLiteral(2)]),ArrayLiteral(IntLiteral(1)))])ElseIf(StringLiteral(Nah\n),[],[CallStmt(Id(sendError),[])])Else([],[Return()])]))])

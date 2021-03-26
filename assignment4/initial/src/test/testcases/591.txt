@@ -1,0 +1,1 @@
+Function: main Body: Var: a = 9; print(string_of_int(factorial(a))); EndBody. Function: factorial Parameter: x Body: If (x == 0) || (x ==1) Then Return 1; EndIf. Return x * factorial(x-1); EndBody.

@@ -1,0 +1,1 @@
+TypeMismatchInStatement(Assign(Id('x'), BinaryOp('=/=', CallExpr(Id('main'), [FloatLiteral(6.5)]), CallExpr(Id('main'), [Id('x')]))))

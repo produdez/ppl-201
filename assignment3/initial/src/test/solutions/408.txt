@@ -1,0 +1,1 @@
+TypeMismatchInStatement(If([[BinaryOp('+', Id('a'), Id('b')), [], [Assign(Id('a'), IntLiteral(5))]], [BinaryOp('!=', Id('a'), Id('b')), [], [Return(None)]]], ([], [])))

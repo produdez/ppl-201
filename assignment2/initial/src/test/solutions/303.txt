@@ -1,0 +1,1 @@
+Program([VarDecl(Id(array),[5,6,7]),VarDecl(Id(a)),VarDecl(Id(c)),VarDecl(Id(c)),VarDecl(Id(another),[0])])

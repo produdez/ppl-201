@@ -1,0 +1,1 @@
+Function: main Body: If 0xAFF Then a=x; ElseIf 0x1234 Then x=5; If another Then doit();  ElseIf nother Then  Break; EndIf. Else Break; EndIf. EndBody.

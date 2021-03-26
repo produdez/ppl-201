@@ -1,0 +1,1 @@
+TypeCannotBeInferred(CallStmt(Id('main'), [IntLiteral(5), Id('x')]))

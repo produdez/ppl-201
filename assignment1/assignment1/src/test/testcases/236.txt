@@ -1,0 +1,1 @@
+Function: main Body: If null Then do(); If not Then Return True; EndIf. ElseIf 3.7+e7 Then gg=""; Else Break; EndIf. EndBody.

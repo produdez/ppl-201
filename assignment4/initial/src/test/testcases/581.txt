@@ -1,0 +1,1 @@
+Var: a[4] = {1,0,0,1}; Function: main Body: Var:i =0; While (i<4) Do a[i] = 1; i=i+1; If i==4 Then Break; EndIf. EndWhile. For(i=0,i<4,1) Do print(string_of_int(a[i])); EndFor. EndBody.

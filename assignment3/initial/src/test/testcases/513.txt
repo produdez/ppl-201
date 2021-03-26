@@ -1,0 +1,1 @@
+Program([FuncDecl(Id('main'), [VarDecl(Id('x'), [], None)], ([VarDecl(Id('arr'), [1], None), VarDecl(Id('b'), [], None)], [Assign(Id('b'), BinaryOp('+', CallExpr(Id('main'), [Id('arr')]), IntLiteral(2)))]))])

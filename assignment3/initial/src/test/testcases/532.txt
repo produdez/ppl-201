@@ -1,0 +1,1 @@
+Program([FuncDecl(Id('main'), [VarDecl(Id('a'), [2], None), VarDecl(Id('b'), [2], None), VarDecl(Id('c'), [2], None)], ([VarDecl(Id('x'), [], None)], [For(Id('a'), IntLiteral(5), ArrayCell(Id('b'), [IntLiteral(2)]), ArrayCell(Id('c'), [IntLiteral(3)]), ([], []))]))])

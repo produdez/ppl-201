@@ -1,0 +1,1 @@
+Function: main Body: Var: a[2][2] = {{1,2},{3,4}} ; f1(a); print(string_of_int(a[0][0])); print(string_of_int(a[0][1])); EndBody. Function: f1 Parameter: x[2][2] Body: x[0][0]= x[0][1];  Return; EndBody.
