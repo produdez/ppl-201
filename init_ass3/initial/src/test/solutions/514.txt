@@ -1,1 +1,0 @@
-Type Cannot Be Inferred: Assign(Id(b),BinaryOp(+,CallExpr(Id(main),[Id(arr)]),IntLiteral(2)))

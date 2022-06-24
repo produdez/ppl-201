@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main)[],([VarDecl(Id(arr),[3])][Assign(Id(arr),IntLiteral(5))]))])

@@ -1,1 +1,0 @@
-Program([VarDecl(Id(a),[3,4]),FuncDecl(Id(main)[],([][Return(Id(a))]))])
